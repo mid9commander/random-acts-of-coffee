@@ -8,7 +8,7 @@ using RandomActsOfCoffee.Entities.HrisApi;
 
 namespace RandomActsOfCoffee
 {
-    class ProfilesToEmployeesTransformer
+    public class ProfilesToEmployeesTransformer
     {
         public List<Employee> TransformProfilesToEmployees(IEnumerable<Profile> profiles)
         {
