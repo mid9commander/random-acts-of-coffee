@@ -7,7 +7,7 @@ using RandomActsOfCoffee.Entities;
 
 namespace RandomActsOfCoffee
 {
-    class MatchMaker
+    public class MatchMaker
     {
         public List<Match> GetMatches(List<Employee> employees, int matchesToMake)
         {
