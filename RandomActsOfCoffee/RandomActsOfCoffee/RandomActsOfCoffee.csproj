@@ -55,6 +55,8 @@
     <Compile Include="Entities\HrisApi\ProfilesIndex.cs" />
     <Compile Include="Entities\Match.cs" />
     <Compile Include="HrisApiConsumer.cs" />
+    <Compile Include="IMatchAlerter.cs" />
+    <Compile Include="EmailMatchAlerter.cs" />
     <Compile Include="MatchMaker.cs" />
     <Compile Include="ProfilesToEmployeesTransformer.cs" />
     <Compile Include="Program.cs" />

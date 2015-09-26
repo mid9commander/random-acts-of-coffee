@@ -10,7 +10,7 @@ namespace RandomActsOfCoffee
 {
     class CoffeeGod
     {
-        public void TopFunctionToBeNamed()
+        public void ArrangeRandomActsOfCoffee(IMatchAlerter matchAlerter)
         {
             var consumer = new HrisApiConsumer();
             ProfilesIndex profilesIndex = consumer.GetProfilesIndex("namely");
@@ -21,6 +21,7 @@ namespace RandomActsOfCoffee
 
             var matchMaker = new MatchMaker();
             var matches = matchMaker.GetMatches(employees, 100);
+            matchAlerter.AlertMatches(matches);
         }
     }
 }

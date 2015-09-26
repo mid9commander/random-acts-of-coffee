@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RandomActsOfCoffee.Entities
 {
-    class Match
+    public class Match
     {
         public Employee EmployeeOne { get; set; }
         public Employee EmployeeTwo { get; set; }
