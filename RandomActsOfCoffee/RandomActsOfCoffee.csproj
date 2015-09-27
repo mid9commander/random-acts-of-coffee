@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMatchLogger.cs" />
     <Compile Include="MatchArranger.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\HrisApi\Job_Title.cs" />

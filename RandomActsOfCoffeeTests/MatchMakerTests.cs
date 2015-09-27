@@ -30,8 +30,6 @@ namespace RandomActsOfCoffeeTests
             Assert.AreEqual(matchesMade, matches.Count());
         }
 
-        [TestCase(20, 10, 10, 10)]
-        [TestCase(10, 10, 10, 10)]
         [TestCase(1, 0, 1, 1)]
         public void DoNotMatchEmployeesFromDifferentStates(int matchesToMake
                                                            ,int matchesMade
