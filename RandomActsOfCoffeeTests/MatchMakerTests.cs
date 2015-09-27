@@ -30,13 +30,33 @@ namespace RandomActsOfCoffeeTests
             Assert.AreEqual(matchesMade, matches.Count());
         }
 
-        //TODO: don't match diff states
+        [TestCase(20, 10, 10, 10)]
+        [TestCase(10, 10, 10, 10)]
+        [TestCase(1, 0, 1, 1)]
+        public void DoNotMatchEmployeesFromDifferentStates(int matchesToMake
+                                                           ,int matchesMade
+                                                           ,int employeesFromNewYork
+                                                           ,int employeesFromCalifornia)
+        {
+            var employees = new List<Employee>();
 
-        private Employee GetRandomEmployee()
+            for (int i = 0; i < employeesFromNewYork; i++)
+                employees.Add(GetRandomEmployee("NY"));
+
+            for (int i = 0; i < employeesFromCalifornia; i++)
+                employees.Add(GetRandomEmployee("CA"));
+
+            var matchMaker = new MatchMaker();
+            var matches = matchMaker.GetMatches(employees, matchesToMake);
+
+            Assert.AreEqual(matchesMade, matches.Count());
+        }
+
+        private Employee GetRandomEmployee(String stateWorksIn = "")
         {
             return new Employee()
             {
-                //TODO:
+                StateWorksIn = stateWorksIn
             };
         }
     }
