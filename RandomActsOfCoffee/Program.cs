@@ -14,6 +14,8 @@ namespace RandomActsOfCoffee
             var sqlMatchLogger = new SqlMatchLogger();
             var matchArranger = new MatchArranger(sqlMatchLogger, emailMatchAlerter);
             matchArranger.ArrangeRandomActsOfCoffee(100);
+
+            Console.ReadLine();
         }
     }
 }
