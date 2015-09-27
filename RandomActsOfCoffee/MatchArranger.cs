@@ -4,12 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RandomActsOfCoffee.Entities;
+using RandomActsOfCoffee.Entities.HrisApi;
 
 namespace RandomActsOfCoffee
 {
-    public class MatchMaker
+    public class MatchArranger
     {
-        public List<Match> GetMatches(List<Employee> employees, int matchesToMake)
+        public void ArrangeRandomActsOfCoffee(IMatchAlerter matchAlerter)
+        {
+            var consumer = new HrisApiConsumer();
+            ProfilesIndex profilesIndex = consumer.GetProfilesIndex("namely");
+            List<Profile> profiles = profilesIndex.profiles.Where(p => p.user_status == "active").ToList();
+
+            var transformer = new ProfilesToEmployeesTransformer();
+            List<Employee> employees = transformer.TransformProfilesToEmployees(profiles);
+
+            var matchMaker = new MatchArranger();
+            var matches = matchMaker.MakeMatches(employees, 100);
+            matchAlerter.AlertMatches(matches);
+        }
+
+        public List<Match> MakeMatches(List<Employee> employees, int matchesToMake)
         {
             var matches = new List<Match>();
 
@@ -49,5 +64,6 @@ namespace RandomActsOfCoffee
 
             return matches;
         }
+
     }
 }

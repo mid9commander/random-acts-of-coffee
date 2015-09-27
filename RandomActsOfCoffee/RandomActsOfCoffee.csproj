@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoffeeGod.cs" />
+    <Compile Include="MatchArranger.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\HrisApi\Job_Title.cs" />
     <Compile Include="Entities\HrisApi\Office.cs" />
@@ -57,7 +57,6 @@
     <Compile Include="HrisApiConsumer.cs" />
     <Compile Include="IMatchAlerter.cs" />
     <Compile Include="EmailMatchAlerter.cs" />
-    <Compile Include="MatchMaker.cs" />
     <Compile Include="ProfilesToEmployeesTransformer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,7 +7,7 @@ using RandomActsOfCoffee.Entities;
 
 namespace RandomActsOfCoffee
 {
-    interface IMatchAlerter
+    public interface IMatchAlerter
     {
         void AlertMatches(IEnumerable<Match> matches);
     }

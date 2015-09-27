@@ -24,8 +24,8 @@ namespace RandomActsOfCoffeeTests
             for (int i = 0; i < employeesToSupply; i++)
                 employees.Add(GetRandomEmployee());
 
-            var matchMaker = new MatchMaker();
-            var matches = matchMaker.GetMatches(employees, matchesToMake);
+            var matchMaker = new MatchArranger();
+            var matches = matchMaker.MakeMatches(employees, matchesToMake);
 
             Assert.AreEqual(matchesMade, matches.Count());
         }
@@ -46,8 +46,8 @@ namespace RandomActsOfCoffeeTests
             for (int i = 0; i < employeesFromCalifornia; i++)
                 employees.Add(GetRandomEmployee("CA"));
 
-            var matchMaker = new MatchMaker();
-            var matches = matchMaker.GetMatches(employees, matchesToMake);
+            var matchMaker = new MatchArranger();
+            var matches = matchMaker.MakeMatches(employees, matchesToMake);
 
             Assert.AreEqual(matchesMade, matches.Count());
         }
