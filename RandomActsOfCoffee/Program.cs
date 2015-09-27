@@ -11,7 +11,14 @@ namespace RandomActsOfCoffee
         static void Main(string[] args)
         {
             var emailMatchAlerter = new EmailMatchAlerter();
-            var sqlMatchLogger = new SqlMatchLogger();
+            try
+            {
+                var sqlMatchLogger = new SqlMatchLogger();
+            }
+            catch
+            {
+                //TODO: log
+            }
             var matchArranger = new MatchArranger(sqlMatchLogger, emailMatchAlerter);
             matchArranger.ArrangeRandomActsOfCoffee(100);
 

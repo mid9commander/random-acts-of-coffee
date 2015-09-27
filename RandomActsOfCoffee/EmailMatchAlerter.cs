@@ -13,7 +13,15 @@ namespace RandomActsOfCoffee
         {
             foreach (var match in matches)
             {
-                AlertMatch(match);
+                try
+                {
+                    AlertMatch(match);
+                }
+                catch
+                {
+                    //there was an error emailing
+                    //TODO: log it
+                }
             }
         }
 
