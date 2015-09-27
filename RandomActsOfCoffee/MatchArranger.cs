@@ -10,7 +10,16 @@ namespace RandomActsOfCoffee
 {
     public class MatchArranger
     {
-        public void ArrangeRandomActsOfCoffee(IMatchAlerter matchAlerter)
+        public IMatchLogger MatchLogger { get; set; }
+        public IMatchAlerter MatchAlerter  { get; set; }
+
+        public MatchArranger(IMatchLogger matchLogger, IMatchAlerter matchAlerter)
+        {
+            this.MatchLogger = matchLogger;
+            this.MatchAlerter = matchAlerter;
+        }
+
+        public void ArrangeRandomActsOfCoffee(int matchesToArrange)
         {
             var consumer = new HrisApiConsumer();
             ProfilesIndex profilesIndex = consumer.GetProfilesIndex("namely");
@@ -19,9 +28,9 @@ namespace RandomActsOfCoffee
             var transformer = new ProfilesToEmployeesTransformer();
             List<Employee> employees = transformer.TransformProfilesToEmployees(profiles);
 
-            var matchMaker = new MatchArranger();
-            var matches = matchMaker.MakeMatches(employees, 100);
-            matchAlerter.AlertMatches(matches);
+            var matches = MakeMatches(employees, matchesToArrange);
+            this.MatchLogger.LogMatches(matches);
+            this.MatchAlerter.AlertMatches(matches);
         }
 
         public List<Match> MakeMatches(List<Employee> employees, int matchesToMake)
@@ -54,16 +63,13 @@ namespace RandomActsOfCoffee
                             EmployeeTwo = secondEmployee
                         };
 
-                        //TODO:
-                        //needs logic to filter out combinations that have already happened
-                        //needs to persist somehow for this
-                        matches.Add(match);
+                        if(!this.MatchLogger.IsAPreexistingMatch(match))
+                            matches.Add(match);
                     }
                 }
             }
 
             return matches;
         }
-
     }
 }

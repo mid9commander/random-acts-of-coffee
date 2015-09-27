@@ -10,9 +10,10 @@ namespace RandomActsOfCoffee
     {
         static void Main(string[] args)
         {
-            var coffeeGod = new MatchArranger();
             var emailMatchAlerter = new EmailMatchAlerter();
-            coffeeGod.ArrangeRandomActsOfCoffee(emailMatchAlerter);
+            var sqlMatchLogger = new SqlMatchLogger();
+            var matchArranger = new MatchArranger(sqlMatchLogger, emailMatchAlerter);
+            matchArranger.ArrangeRandomActsOfCoffee(100);
         }
     }
 }

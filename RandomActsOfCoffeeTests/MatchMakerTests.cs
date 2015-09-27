@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using Moq;
 using RandomActsOfCoffee;
 using RandomActsOfCoffee.Entities;
 
@@ -24,8 +25,8 @@ namespace RandomActsOfCoffeeTests
             for (int i = 0; i < employeesToSupply; i++)
                 employees.Add(GetRandomEmployee());
 
-            var matchMaker = new MatchArranger();
-            var matches = matchMaker.MakeMatches(employees, matchesToMake);
+            var matchArranger = new MatchArranger(GetStubbedMatchLogger(), GetStubbedMatchAlerter());
+            var matches = matchArranger.MakeMatches(employees, matchesToMake);
 
             Assert.AreEqual(matchesMade, matches.Count());
         }
@@ -44,8 +45,8 @@ namespace RandomActsOfCoffeeTests
             for (int i = 0; i < employeesFromCalifornia; i++)
                 employees.Add(GetRandomEmployee("CA"));
 
-            var matchMaker = new MatchArranger();
-            var matches = matchMaker.MakeMatches(employees, matchesToMake);
+            var matchArranger = new MatchArranger(GetStubbedMatchLogger(), GetStubbedMatchAlerter());
+            var matches = matchArranger.MakeMatches(employees, matchesToMake);
 
             Assert.AreEqual(matchesMade, matches.Count());
         }
@@ -56,6 +57,30 @@ namespace RandomActsOfCoffeeTests
             {
                 StateWorksIn = stateWorksIn
             };
+        }
+
+        private IMatchLogger GetStubbedMatchLogger()
+        {
+            var matchLogger = new Mock<IMatchLogger>();
+
+            matchLogger.Setup(l => l
+                .IsAPreexistingMatch(It.IsAny<RandomActsOfCoffee.Entities.Match>()))
+                .Returns(false);
+
+            matchLogger.Setup(l => l
+                .LogMatches(It.IsAny<IEnumerable<RandomActsOfCoffee.Entities.Match>>()));
+
+            return matchLogger.Object;
+        }
+
+        private IMatchAlerter GetStubbedMatchAlerter()
+        {
+            var matchAlerter = new Mock<IMatchAlerter>();
+
+            matchAlerter.Setup(l => l
+                .AlertMatches(It.IsAny<IEnumerable<RandomActsOfCoffee.Entities.Match>>()));
+
+            return matchAlerter.Object;
         }
     }
 }
