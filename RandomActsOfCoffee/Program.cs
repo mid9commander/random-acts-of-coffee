@@ -11,18 +11,12 @@ namespace RandomActsOfCoffee
         static void Main(string[] args)
         {
             var emailMatchAlerter = new EmailMatchAlerter();
-            try
-            {
-                var sqlMatchLogger = new SqlMatchLogger();
-            }
-            catch
-            {
-                //TODO: log
-            }
-            var matchArranger = new MatchArranger(sqlMatchLogger, emailMatchAlerter);
-            matchArranger.ArrangeRandomActsOfCoffee(100);
+            var dynamoDbMatchLogger = new DynamoDbMatchLogger();
+            var matchArranger = new MatchArranger(dynamoDbMatchLogger, emailMatchAlerter);
+            matchArranger.ArrangeRandomActsOfCoffee(2);
 
             Console.ReadLine();
         }
     }
 }
+
