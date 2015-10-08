@@ -12,7 +12,7 @@ namespace RandomActsOfCoffeeTests
     [TestFixture]
     public class ProfilesToEmployeeTransformerTests
     {
-        [TestCase("", "Homer")]
+        [TestCase(default(String), "Homer")]
         [TestCase("Homey", "Homey")]
         public void TransformProfileToEmployee(String apiPreferredName, String transformedFirstName)
         {

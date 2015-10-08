@@ -19,7 +19,7 @@ namespace RandomActsOfCoffee
                 var employee = new Employee()
                 {
                     Id = profile.id,
-                    FirstName = profile.preferred_name != String.Empty ? profile.preferred_name : profile.first_name,
+                    FirstName = String.IsNullOrEmpty(profile.preferred_name) ? profile.first_name : profile.preferred_name,
                     LastName = profile.last_name,
                     Email = profile.email,
                     StateWorksIn = profile.office.state_id
